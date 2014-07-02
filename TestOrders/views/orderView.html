@@ -1,0 +1,42 @@
+<div data-role="view" id="single-order" data-layout="default" data-init="app.Order.init" data-show="app.Order.show">
+    <div data-role="header">
+    
+        <div data-role="navbar">
+            Order Details
+            <a class="nav-button nav-button-back hide-text" data-align="left" data-role="backbutton">Back</a>
+            <a class="nav-button nav-button-post" data-align="right" data-role="button">Complete</a>
+        </div>
+    </div><form id="detailForm">
+        <ul id="orderDetail" data-role="listview" data-style="inset">
+            <!-- -->
+
+            <li>
+                <label style="width:40px">
+                    Order Number
+                    <input type="text" id="ordernumber" readonly="true" data-bind="value: OrderNumber" />
+                </label>
+            </li>
+            <li>
+                <label>Customer Name:<input type="text" id="custname" readonly="true" data-bind="value: CustomerName" /></label>
+            </li>
+            <li>
+                <label>Customer Address:<input type="text" id="custaddr" readonly="true" data-bind="value: CustomerAddress" /></label>
+            </li>
+            <li>
+                <label>Customer Number:<input type="text" id="custnumber" readonly="true" data-bind="value: CustomerNumber" /></label>
+            </li>
+            <li>
+                <label>Product Name:<input type="text" id="prodname" readonly="true" data-bind="value: ProductName" /></label>
+            </li>
+            <li>
+                <label>Quantity Ordered:<input type="text" id="orderquantity" readonly="true" data-bind="value: QuantityOrdered" /></label>
+            </li>
+            <li>
+                <label>Delivery:<input type="text" id="delivery" readonly="true" data-bind="value: DeliveryDate" /></label>
+            </li>
+
+            <!--   -->
+        </ul>
+    </form>
+</div>
+

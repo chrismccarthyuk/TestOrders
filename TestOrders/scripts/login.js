@@ -1,52 +1,80 @@
-(function (global) {
-    var LoginViewModel,
-        app = global.app = global.app || {};
+/**
+ * Login view model
+ */
 
-    LoginViewModel = kendo.data.ObservableObject.extend({
-        isLoggedIn: false,
-        username: "",
-        password: "",
+var app = app || {};
 
-        onLogin: function () {
-            var that = this,
-                username = that.get("username").trim(),
-                password = that.get("password").trim();
+app.Login = (function () {
+    'use strict';
 
-            if (username === "" || password === "") {
-                navigator.notification.alert("Both fields are required!",
-                    function () { }, "Login failed", 'OK');
+    var loginViewModel = (function () {
 
-                return;
+       
+
+        var $loginUsername;
+        var $loginPassword;
+
+       // var isAnalytics = analytics.isAnalytics();
+
+        var init = function () {
+
+            if (!app.isKeySet(appSettings.everlive.apiKey)) {
+                app.mobileApp.navigate('views/noApiKey.html', 'fade');
             }
 
-            that.set("isLoggedIn", true);
-        },
+            $loginUsername = $('#loginUsername');
+            $loginPassword = $('#loginPassword');
 
-        onLogout: function () {
-            var that = this;
+           
+        };
 
-            that.clearForm();
-            that.set("isLoggedIn", false);
-        },
+        var show = function () {
+            $loginUsername.val('');
+            $loginPassword.val('');
+        };
 
-        clearForm: function () {
-            var that = this;
+        // Authenticate to use Backend Services as a particular user
+        var login = function () {
 
-            that.set("username", "");
-            that.set("password", "");
-        },
+            var username = $loginUsername.val();
+            var password = $loginPassword.val();
 
-        checkEnter: function (e) {
-            var that = this;
+            // Authenticate using the username and password
+            app.everlive.Users.login(username, password)
+            .then(function () {
+                // EQATEC analytics monitor - track login type
+               // if (isAnalytics) {
+                 //   analytics.TrackFeature('Login.Regular');
+               // }
 
-            if (e.keyCode == 13) {
-                $(e.target).blur();
-                that.onLogin();
-            }
-        }
-    });
+                //return app.Users.load();
+                app.mobileApp.navigate('views/ordersView.html');
+                //app.mobileApp.navigate('exideOrders.html');
+            })
+            .then(function () {
 
-    app.loginService = {
-        viewModel: new LoginViewModel()
-    };
-})(window);
+               // app.mobileApp.navigate('views/ordersView.html');
+               // app.mobileApp.navigate('exideOrders.html');
+            })
+            .then(null,
+                  function (err) {
+                      app.showError(err.message);
+                  }
+            );
+        };
+
+       
+
+        return {
+            init: init,
+            show: show,
+            
+            login: login,
+            
+        };
+
+    }());
+
+    return loginViewModel;
+
+}());

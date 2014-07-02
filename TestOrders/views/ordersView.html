@@ -1,0 +1,22 @@
+<div data-role="view" id="view-all-orders" data-layout="default" data-model="app.Orders" data-title="Orders">
+    <div data-role="header">
+        <div data-role="navbar">
+            Orders
+            <a class="nav-button nav-button-back hide-text" data-align="left" data-role="backbutton" data-click="app.Orders.logout">Log out</a>
+
+        </div>
+    </div>
+
+    <ul id="orders-listView " data-style="inset" data-role="listview" data-template="ordersTemplate" data-bind="source: orders"></ul>
+    <p id="no-orders-span" hidden="hidden" class="no-items-msg">
+        <b>You have no orders yet.</b>
+    </p>
+</div>
+<script type="text/x-kendo-template" id="ordersTemplate">
+    <div data-role="touch" data-bind="events: { tap: orderSelected }" class="cf">
+        <div>
+            <h2>#:OrderNumber#</h2>
+            <p>#:CustomerName#</p>
+        </div>
+    </div>
+</script>
