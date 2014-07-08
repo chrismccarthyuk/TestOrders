@@ -1,6 +1,6 @@
 <div data-role="view" id="single-order" data-layout="default" data-init="app.Order.init" data-show="app.Order.show">
     <div data-role="header">
-    
+
         <div data-role="navbar">
             Order Details
             <a class="nav-button nav-button-back hide-text" data-align="left" data-role="backbutton">Back</a>
@@ -32,7 +32,7 @@
                 <label>Quantity Ordered:<input type="text" id="orderquantity" readonly="true" data-bind="value: QuantityOrdered" /></label>
             </li>
             <li>
-                <label>Delivery:<input type="text" id="delivery" readonly="true" data-bind="value: AppHelper.formatDate(DeliveryDate)" /></label>
+                <label>Delivery:<input type="text" id="delivery" readonly="true" data-bind="value: DeliveryDateFormatted" /></label>
             </li>
 
             <!--   -->

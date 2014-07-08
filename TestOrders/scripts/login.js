@@ -9,12 +9,12 @@ app.Login = (function () {
 
     var loginViewModel = (function () {
 
-       
+
 
         var $loginUsername;
         var $loginPassword;
 
-       // var isAnalytics = analytics.isAnalytics();
+        // var isAnalytics = analytics.isAnalytics();
 
         var init = function () {
 
@@ -25,7 +25,7 @@ app.Login = (function () {
             $loginUsername = $('#loginUsername');
             $loginPassword = $('#loginPassword');
 
-           
+
         };
 
         var show = function () {
@@ -43,9 +43,9 @@ app.Login = (function () {
             app.everlive.Users.login(username, password)
             .then(function () {
                 // EQATEC analytics monitor - track login type
-               // if (isAnalytics) {
-                 //   analytics.TrackFeature('Login.Regular');
-               // }
+                // if (isAnalytics) {
+                //   analytics.TrackFeature('Login.Regular');
+                // }
 
                 //return app.Users.load();
                 app.mobileApp.navigate('views/ordersView.html');
@@ -53,8 +53,8 @@ app.Login = (function () {
             })
             .then(function () {
 
-               // app.mobileApp.navigate('views/ordersView.html');
-               // app.mobileApp.navigate('exideOrders.html');
+                // app.mobileApp.navigate('views/ordersView.html');
+                // app.mobileApp.navigate('exideOrders.html');
             })
             .then(null,
                   function (err) {
@@ -63,14 +63,14 @@ app.Login = (function () {
             );
         };
 
-       
+
 
         return {
             init: init,
             show: show,
-            
+
             login: login,
-            
+
         };
 
     }());

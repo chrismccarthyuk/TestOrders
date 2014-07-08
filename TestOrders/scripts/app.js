@@ -2,12 +2,12 @@ var app = (function (win) {
     'use strict';
 
     // Global error handling
-   	var showAlert = function(message, title, callback) {
+    var showAlert = function (message, title, callback) {
         navigator.notification.alert(message, callback || function () {
         }, title, 'OK');
     };
 
-    var showError = function(message) {
+    var showError = function (message) {
         showAlert(message, 'Error occured');
     };
 
@@ -22,7 +22,7 @@ var app = (function (win) {
     });
 
     // Global confirm dialog
-    var showConfirm = function(message, title, callback) {
+    var showConfirm = function (message, title, callback) {
         navigator.notification.confirm(message, callback || function () {
         }, title, ['OK', 'Cancel']);
     };
@@ -38,14 +38,14 @@ var app = (function (win) {
 
     var fixViewResize = function () {
         if (device.platform === 'iOS') {
-            setTimeout(function() {
+            setTimeout(function () {
                 $(document.body).height(window.innerHeight);
             }, 10);
         }
     };
 
     // Handle device back button tap
-    var onBackKeyDown = function(e) {
+    var onBackKeyDown = function (e) {
         e.preventDefault();
 
         navigator.notification.confirm('Do you really want to exit?', function (confirmed) {
@@ -63,28 +63,28 @@ var app = (function (win) {
         }, 'Exit', ['OK', 'Cancel']);
     };
 
-    var onDeviceReady = function() {
+    var onDeviceReady = function () {
         // Handle "backbutton" event
         document.addEventListener('backbutton', onBackKeyDown, false);
 
         navigator.splashscreen.hide();
         fixViewResize();
 
-      /*  if (analytics.isAnalytics()) {
-            analytics.Start();
-        }
-        
-        // Initialize AppFeedback
-        if (app.isKeySet(appSettings.feedback.apiKey)) {
-            try {
-                feedback.initialize(appSettings.feedback.apiKey);
-            } catch (err) {
-                console.log('Something went wrong:');
-                console.log(err);
-            }
-        } else {
-            console.log('Telerik AppFeedback API key is not set. You cannot use feedback service.');
-        }*/
+        /*  if (analytics.isAnalytics()) {
+              analytics.Start();
+          }
+          
+          // Initialize AppFeedback
+          if (app.isKeySet(appSettings.feedback.apiKey)) {
+              try {
+                  feedback.initialize(appSettings.feedback.apiKey);
+              } catch (err) {
+                  console.log('Something went wrong:');
+                  console.log(err);
+              }
+          } else {
+              console.log('Telerik AppFeedback API key is not set. You cannot use feedback service.');
+          }*/
     };
 
     // Handle "deviceready" event
@@ -94,9 +94,9 @@ var app = (function (win) {
 
     // Initialize Everlive SDK
     var el = new Everlive({
-                              apiKey: appSettings.everlive.apiKey,
-                              scheme: appSettings.everlive.scheme
-                          });
+        apiKey: appSettings.everlive.apiKey,
+        scheme: appSettings.everlive.scheme
+    });
 
     var emptyGuid = '00000000-0000-0000-0000-000000000000';
 
@@ -122,7 +122,7 @@ var app = (function (win) {
 
         // Date formatter. Return date in d.m.yyyy format
         formatDate: function (dateString) {
-            return kendo.toString(new Date(dateString), 'MMM d, yyyy');
+            return kendo.toString(new Date(dateString), 'MM/dd/yyyy');
         },
 
         // Current user logout
@@ -136,10 +136,10 @@ var app = (function (win) {
 
     // Initialize KendoUI mobile application
     var mobileApp = new kendo.mobile.Application(document.body, {
-                                                     transition: 'slide',
-                                                     statusBarStyle: statusBarStyle,
-                                                     skin: 'flat'
-                                                 });
+        transition: 'slide',
+        statusBarStyle: statusBarStyle,
+        skin: 'flat'
+    });
 
     var getYear = (function () {
         return new Date().getFullYear();
